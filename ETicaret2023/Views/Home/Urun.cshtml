@@ -1,0 +1,64 @@
+﻿@using ETicaret2023.Models;
+@model Urunler
+@{
+    ViewBag.Title = "Urun";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET MVC ETİCARET PROJESİ</h1>
+
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Kategoriler</h2>
+        <ul style="list-style:none;">
+            @foreach (Kategoriler item in (List<Kategoriler>)ViewBag.Kategoriler)
+            {
+                <li>
+                    @Html.ActionLink(item.KategoriAdi, "Kategori", new { id = item.KategoriID })
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <div class="col-md-9">
+        
+        <h5>@Model.UrunAdi</h5>
+        <div class="row">
+
+
+            <div class="col-md-6">
+
+                <img src="/image/@(Model.UrunID+".jpg")" style=" width:50%;" />
+               </div>
+            <div class="col-md-6">
+
+
+                <b>Ürün Fiyatı</b> <span style=" color:red; font-size:15px;font-weight:bold">@Model.UrunFiyati TL</span>
+                <br /><br />
+
+
+                @using (Html.BeginForm("SepeteEkle", "Sepet"))
+                {
+                    @Html.HiddenFor(x => x.UrunID)
+                    <input type="number" name="adet" value="1" id="adet" />
+                    <input type="submit" value="Sepete Ekle" id="gönder" />
+
+                }
+
+            </div>
+
+
+
+            </div>
+
+
+
+        
+    <h2>@Model.UrunAciklamasi</h2>
+    </div>
+
+</div>
+

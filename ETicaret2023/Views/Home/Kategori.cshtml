@@ -1,30 +1,35 @@
-﻿@using ETicaret2023.Models;
+﻿@using ETicaret2023.Models
+@model List<Urunler>
 @{
-    ViewBag.Title = "Home Page";
+    Kategoriler kat=(Kategoriler) ViewBag.kategori;
+    ViewBag.Title =kat.KategoriAdi;
 }
+
+
+
 
 <div class="jumbotron">
     <h1>ASP.NET MVC ETİCARET PROJESİ</h1>
- 
+
 </div>
 
 <div class="row">
     <div class="col-md-3">
         <h2>Kategoriler</h2>
         <ul style="list-style:none;">
-           @foreach (Kategoriler item in (List<Kategoriler>)ViewBag.Kategoriler)
-           {
-            <li>
-           @Html.ActionLink(item.KategoriAdi,"Kategori",new {id=item.KategoriID})
-            </li>
-           }
+            @foreach (Kategoriler item in (List<Kategoriler>)ViewBag.Kategoriler)
+            {
+                <li>
+                    @Html.ActionLink(item.KategoriAdi, "Kategori", new { id = item.KategoriID })
+                </li>
+            }
         </ul>
-        
+
     </div>
     <div class="col-md-9">
         <h2>Ürünler</h2>
         <div class="row">
-            @foreach (Urunler item in (List<Urunler>)ViewBag.Urunler)
+            @foreach (Urunler item in Model)
             {
                 <div class="col-md-4" style="border:1px solid; height:200px; width:250px; ">
                     <h5>@item.UrunAdi</h5>
@@ -37,7 +42,7 @@
 
 
 
-                </div>  
+                </div>
             }
 
 
