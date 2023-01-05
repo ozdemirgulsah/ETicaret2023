@@ -9,7 +9,7 @@ namespace ETicaret2023.Controllers
 {
     public class HomeController : Controller
     {
-        E_TicaretEntities db=new E_TicaretEntities();
+        ETicaretEntities db =new ETicaretEntities();
         public ActionResult Index()
         {
             ViewBag.Kategoriler=db.Kategoriler.ToList();

@@ -9,18 +9,19 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+
+    <div class="navbar navbar-inverse navbar-fixed-top " style="background-color:aqua" >
+        <div class="container" style="color:aqua">
+            <div class="navbar-header" style="color:antiquewhite">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ETicaret", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("E Ticaret", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            <div class="navbar-collapse collapse" style="color:antiquewhite" >
+                <ul class="nav navbar-nav" style="color:antiquewhite">
                     <li>@Html.ActionLink("Anasayfa", "Index", "Home")</li>
                     <li>@Html.ActionLink("Hakkında", "About", "Home")</li>
                     <li>@Html.ActionLink("İletişim", "Contact", "Home")</li>

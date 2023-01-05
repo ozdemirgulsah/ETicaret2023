@@ -26,9 +26,9 @@
         <div class="row">
             @foreach (Urunler item in (List<Urunler>)ViewBag.Urunler)
             {
-                <div class="col-md-4" style="border:1px solid; height:200px; width:250px; ">
+                <div class="col-md-4" style="border:2px solid; height:240px; width:280px; ">
                     <h5>@item.UrunAdi</h5>
-                    <img src="/image/@(item.UrunID+".jpg")" style=" width:50%;" />
+                    <img src="/image/@(item.UrunID+".jpg")" style=" width:45%;" />
 
                     <p>
                         <a href="/Home/Urun/@item.UrunID" class="btn btn-default">Ürün Detay &raquo;</a>

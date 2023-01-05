@@ -14,7 +14,7 @@ namespace ETicaret2023.Controllers
 {
     public class UrunlerController : Controller
     {
-        private E_TicaretEntities db = new E_TicaretEntities();
+        private ETicaretEntities db = new ETicaretEntities();
 
         // GET: Urunler
         public ActionResult Index()
