@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETicaret2023", "ETicaret2023\ETicaret2023.csproj", "{1F22B460-6FBA-47FE-AD4E-052C71E4D495}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiProje", "WebApiProje\WebApiProje.csproj", "{3E28314A-64C1-4A34-A54E-854C6889BE1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1F22B460-6FBA-47FE-AD4E-052C71E4D495}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F22B460-6FBA-47FE-AD4E-052C71E4D495}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F22B460-6FBA-47FE-AD4E-052C71E4D495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E28314A-64C1-4A34-A54E-854C6889BE1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E28314A-64C1-4A34-A54E-854C6889BE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E28314A-64C1-4A34-A54E-854C6889BE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E28314A-64C1-4A34-A54E-854C6889BE1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

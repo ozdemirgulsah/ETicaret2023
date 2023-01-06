@@ -4,20 +4,44 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using ETicaret2023.Models;
+using Newtonsoft.Json;
 
 namespace ETicaret2023.Controllers
 {
     public class KategorilerController : Controller
     {
         private ETicaretEntities db = new ETicaretEntities();
+        HttpClient client=new HttpClient();
 
         // GET: Kategoriler
         public ActionResult Index()
         {
-            return View(db.Kategoriler.ToList());
+            List<Kategoriler> kategoriler= new List<Kategoriler>();
+          client.BaseAddress=new Uri("https://localhost:44333/api/");
+            var response=client.GetAsync("Kategori");
+
+            response.Wait();
+
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var data =result.Content.ReadAsStringAsync();
+                data.Wait();
+                kategoriler=JsonConvert.DeserializeObject<List<Kategoriler>>(data.Result);
+
+
+
+                
+
+            }
+
+
+
+            return View(kategoriler);
         }
 
         // GET: Kategoriler/Details/5
@@ -50,9 +74,20 @@ namespace ETicaret2023.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Kategoriler.Add(kategoriler);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                client.BaseAddress=new Uri("https://localhost:44337/api/");
+
+                
+                var response=HttpClientExtensions.PostAsJsonAsync<Kategoriler>(client,"Kategori",kategoriler);
+              
+                response.Wait();
+                var result=response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                     return RedirectToAction("Index");
+                }
+                //db.Kategoriler.Add(kategoriler);
+                //db.SaveChanges();
+               return View(kategoriler);
             }
 
             return View(kategoriler);
