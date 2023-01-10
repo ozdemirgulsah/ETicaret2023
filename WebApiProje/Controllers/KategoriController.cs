@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
@@ -17,6 +18,7 @@ namespace WebApiProje.Controllers
 
         E_TicaretEntities db= new E_TicaretEntities();
         //get listeleme //host  //put update metodu //delete sil metodu
+      
 
         [HttpGet]
         public List<Kategoriler> Get()
@@ -35,8 +37,8 @@ namespace WebApiProje.Controllers
             Kategoriler kategori= db.Kategoriler.Find(id);
             Kategori kat=new Kategori()
             {
-                Id=kategori.KategoriID,
-                name=kategori.KategoriAdi
+                KategoriID=kategori.KategoriID,
+                KategoriAdi=kategori.KategoriAdi
             };
           
             return Ok(kat);
@@ -48,10 +50,25 @@ namespace WebApiProje.Controllers
             db.Kategoriler.Add(kategori);
             db.SaveChanges();
             return Ok();
-
+            }
+                       
+            public IHttpActionResult Put([FromBody]Kategoriler kategori)
+            {
+           db.Entry(kategori).State=EntityState.Modified;
+            db.SaveChanges();
+            return Ok();
+            }
+                      
+             public IHttpActionResult Delete(int id)
+            {
+            Kategoriler kategori=db.Kategoriler.Find(id);
+            db.Kategoriler.Remove(kategori);
+            db.SaveChanges();
+            return Ok();
+            }
           
                 
-            }
+            
        
 
         

@@ -21,7 +21,7 @@ namespace ETicaret2023.Controllers
         public ActionResult Index()
         {
             List<Kategoriler> kategoriler= new List<Kategoriler>();
-          client.BaseAddress=new Uri("https://localhost:44333/api/");
+          client.BaseAddress=new Uri("https://localhost:44337/api/");
             var response=client.GetAsync("Kategori");
 
             response.Wait();
@@ -32,14 +32,9 @@ namespace ETicaret2023.Controllers
                 var data =result.Content.ReadAsStringAsync();
                 data.Wait();
                 kategoriler=JsonConvert.DeserializeObject<List<Kategoriler>>(data.Result);
-
-
-
                 
 
             }
-
-
 
             return View(kategoriler);
         }
@@ -51,12 +46,30 @@ namespace ETicaret2023.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategoriler kategoriler = db.Kategoriler.Find(id);
+            Kategoriler kategoriler = KategoriBul(id);
+
             if (kategoriler == null)
             {
                 return HttpNotFound();
             }
             return View(kategoriler);
+        }
+
+        private Kategoriler KategoriBul(int? id)
+        {
+            Kategoriler kategoriler = null;
+            client.BaseAddress = new Uri("https://localhost:44337/api/");
+            var response = client.GetAsync("Kategori/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var data = result.Content.ReadAsAsync<Kategoriler>();
+                data.Wait();
+                kategoriler = data.Result;
+            }
+
+            return kategoriler;
         }
 
         // GET: Kategoriler/Create
@@ -77,7 +90,7 @@ namespace ETicaret2023.Controllers
                 client.BaseAddress=new Uri("https://localhost:44337/api/");
 
                 
-                var response=HttpClientExtensions.PostAsJsonAsync<Kategoriler>(client,"Kategori",kategoriler);
+                var response=client.PostAsJsonAsync<Kategoriler>("Kategori",kategoriler);
               
                 response.Wait();
                 var result=response.Result;
@@ -117,8 +130,19 @@ namespace ETicaret2023.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(kategoriler).State = EntityState.Modified;
-                db.SaveChanges();
+
+                client.BaseAddress=new Uri("https://localhost:44337/api/");
+                var response=client.PutAsJsonAsync<Kategoriler>("Kategori",kategoriler);
+                response.Wait();
+
+                var result=response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+               
+                //db.Entry(kategoriler).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(kategoriler);
@@ -144,9 +168,14 @@ namespace ETicaret2023.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Kategoriler kategoriler = db.Kategoriler.Find(id);
-            db.Kategoriler.Remove(kategoriler);
-            db.SaveChanges();
+                client.BaseAddress=new Uri("https://localhost:44337/api/");
+                var response=client.DeleteAsync("Kategori/"+id);
+                var result=response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+           
             return RedirectToAction("Index");
         }
 
